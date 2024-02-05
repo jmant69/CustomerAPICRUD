@@ -1,4 +1,4 @@
-package com.jmant69.CustomerAPI;
+package com.jmant69.CustomerAPICRUD;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;

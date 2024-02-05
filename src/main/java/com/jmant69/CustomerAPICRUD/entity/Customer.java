@@ -1,4 +1,4 @@
-package com.jmant69.CustomerAPI.entity;
+package com.jmant69.CustomerAPICRUD.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

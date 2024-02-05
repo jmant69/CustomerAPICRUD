@@ -12,10 +12,11 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jmant69.CustomerAPI.DTO.CustomerDTO;
-import com.jmant69.CustomerAPI.entity.Customer;
-import com.jmant69.CustomerAPI.exception.CustomerNotFoundException;
-import com.jmant69.CustomerAPI.service.CustomerService;
+import com.jmant69.CustomerAPICRUD.DTO.CustomerDTO;
+import com.jmant69.CustomerAPICRUD.controller.CustomerAPIController;
+import com.jmant69.CustomerAPICRUD.entity.Customer;
+import com.jmant69.CustomerAPICRUD.exception.CustomerNotFoundException;
+import com.jmant69.CustomerAPICRUD.service.CustomerService;
 
 @WebMvcTest(CustomerAPIController.class)
 public class CustomerAPIControllerTest {

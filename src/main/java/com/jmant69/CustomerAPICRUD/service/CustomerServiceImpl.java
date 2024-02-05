@@ -1,13 +1,13 @@
-package com.jmant69.CustomerAPI.service;
+package com.jmant69.CustomerAPICRUD.service;
 
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.jmant69.CustomerAPI.entity.Customer;
-import com.jmant69.CustomerAPI.exception.CustomerNotFoundException;
-import com.jmant69.CustomerAPI.repository.CustomerRepository;
+import com.jmant69.CustomerAPICRUD.entity.Customer;
+import com.jmant69.CustomerAPICRUD.exception.CustomerNotFoundException;
+import com.jmant69.CustomerAPICRUD.repository.CustomerRepository;
 
 @Service
 public class CustomerServiceImpl implements CustomerService{

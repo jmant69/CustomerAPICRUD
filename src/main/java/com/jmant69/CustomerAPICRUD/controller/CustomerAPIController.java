@@ -1,4 +1,4 @@
-package com.jmant69.CustomerAPI.controller;
+package com.jmant69.CustomerAPICRUD.controller;
 
 import java.net.URI;
 
@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jmant69.CustomerAPI.DTO.CustomerDTO;
-import com.jmant69.CustomerAPI.entity.Customer;
-import com.jmant69.CustomerAPI.exception.CustomerNotFoundException;
-import com.jmant69.CustomerAPI.service.CustomerService;
+import com.jmant69.CustomerAPICRUD.DTO.CustomerDTO;
+import com.jmant69.CustomerAPICRUD.entity.Customer;
+import com.jmant69.CustomerAPICRUD.exception.CustomerNotFoundException;
+import com.jmant69.CustomerAPICRUD.service.CustomerService;
 
 @RestController
 @RequestMapping("/customer")
