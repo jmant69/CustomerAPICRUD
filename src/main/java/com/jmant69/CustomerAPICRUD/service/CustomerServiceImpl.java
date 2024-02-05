@@ -27,5 +27,15 @@ public class CustomerServiceImpl implements CustomerService{
  
         throw new CustomerNotFoundException();
     }
+    
+    public Customer update(Customer customer) {
+        return repo.save(customer);
+    }
+
+	@Override
+	public Customer delete(Long id) {
+        repo.deleteById(id);
+        return null;
+	}
  
 }

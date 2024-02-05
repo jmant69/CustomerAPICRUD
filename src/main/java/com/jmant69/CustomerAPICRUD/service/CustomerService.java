@@ -8,5 +8,9 @@ public interface CustomerService {
     public Customer add(Customer customer);
  
     public Customer get(Long id) throws CustomerNotFoundException;
+    
+    public Customer update(Customer customer);
+
+	public Customer delete(Long id);
 	
 }
