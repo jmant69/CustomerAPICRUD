@@ -1,4 +1,4 @@
-package com.jmant69.CustomerAPI.controller;
+package com.jmant69.CustomerAPICRUD.controller;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

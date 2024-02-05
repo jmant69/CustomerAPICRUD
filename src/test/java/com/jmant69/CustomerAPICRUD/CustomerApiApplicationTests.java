@@ -1,4 +1,4 @@
-package com.jmant69.CustomerAPI;
+package com.jmant69.CustomerAPICRUD;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
