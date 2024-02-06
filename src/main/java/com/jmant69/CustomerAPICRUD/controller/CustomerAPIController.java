@@ -54,7 +54,7 @@ public class CustomerAPIController {
 	@PutMapping
 	public ResponseEntity<?> update(@RequestBody Customer customer) {
 		try {
-			Customer customerToUpdate = service.get(customer.getCustomerRef());
+			service.get(customer.getCustomerRef());
 			Customer updatedCustomer = service.update(customer);
 
 			CustomerDTO customerDto = entity2Dto(updatedCustomer);
