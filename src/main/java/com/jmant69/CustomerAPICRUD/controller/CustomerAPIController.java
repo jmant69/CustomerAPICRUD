@@ -60,8 +60,6 @@ public class CustomerAPIController {
 
 			CustomerDTO customerDto = entity2Dto(updatedCustomer);
 
-			URI uri = URI.create("/customer/" + customerDto.getCustomerRef());
-
 			return ResponseEntity.ok(customerDto);
 		} catch (CustomerNotFoundException e) {
 			return ResponseEntity.notFound().build();
