@@ -37,51 +37,47 @@ public class CustomerAPIController {
 
 		URI uri = URI.create("/customer/" + customerDto.getCustomerRef());
 
-		return ResponseEntity.created(uri).body(persistedCustomer);
+		return ResponseEntity.created(uri).body(customerDto);
 	}
 
-	@GetMapping("/{id}")
-	public ResponseEntity<?> get(@PathVariable("id") Long id) {
+	@GetMapping("/{customerRef}")
+	public ResponseEntity<?> get(@PathVariable("customerRef") Long customerRef) {
 		try {
-			Customer customer = service.get(id);
+			Customer customer = service.get(customerRef);
 			return ResponseEntity.ok(entity2Dto(customer));
 		} catch (CustomerNotFoundException e) {
 			e.printStackTrace();
 			return ResponseEntity.notFound().build();
+//			return ResponseEntity.ok("Customer Ref " + customerRef + " not found");
 		}
 	}
 
 	@PutMapping
 	public ResponseEntity<?> update(@RequestBody Customer customer) {
 		try {
-			service.get(customer.getCustomerRef());
+//			service.get(customer.getCustomerRef());
 			Customer updatedCustomer = service.update(customer);
 
 			CustomerDTO customerDto = entity2Dto(updatedCustomer);
 
 			URI uri = URI.create("/customer/" + customerDto.getCustomerRef());
 
-			return ResponseEntity.created(uri).body(updatedCustomer);
+			return ResponseEntity.ok(customerDto);
 		} catch (CustomerNotFoundException e) {
-			return ResponseEntity.ok("Customer Ref " + customer.getCustomerRef() + " not found");
+			return ResponseEntity.notFound().build();
+//			return ResponseEntity.ok("Customer Ref " + customer.getCustomerRef() + " not found");
 		}
-//		Customer persistedCustomer = service.update(customer);
-//
-//		CustomerDTO customerDto = entity2Dto(persistedCustomer);
-//
-//		URI uri = URI.create("/customer/" + customerDto.getCustomerRef());
-//
-//		return ResponseEntity.created(uri).body(persistedCustomer);
 	}
 
-	@DeleteMapping("/{id}")
-	public ResponseEntity<?> delete(@PathVariable("id") Long id) {
+	@DeleteMapping("/{customerRef}")
+	public ResponseEntity<?> delete(@PathVariable("customerRef") Long customerRef) {
 		try {
-			Customer customer = service.get(id);
-			service.delete(customer.getCustomerRef());
-			return ResponseEntity.ok("Customer Ref " + id + " deleted");
+			service.delete(customerRef);
+			return ResponseEntity.noContent().build();
+//			return ResponseEntity.ok("Customer Ref " + customerRef + " deleted");
 		} catch (CustomerNotFoundException e) {
-			return ResponseEntity.ok("Customer Ref " + id + " not found");
+			return ResponseEntity.notFound().build();
+//			return ResponseEntity.ok("Customer Ref " + customerRef + " not found");
 		}
 	}
 

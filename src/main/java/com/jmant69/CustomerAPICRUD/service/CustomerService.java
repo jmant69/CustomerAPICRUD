@@ -7,10 +7,10 @@ public interface CustomerService {
 
     public Customer add(Customer customer);
  
-    public Customer get(Long id) throws CustomerNotFoundException;
+    public Customer get(Long customerRef) throws CustomerNotFoundException;
     
-    public Customer update(Customer customer);
+    public Customer update(Customer customer) throws CustomerNotFoundException;
 
-	public Customer delete(Long id);
+	public void delete(Long customerRef) throws CustomerNotFoundException;
 	
 }

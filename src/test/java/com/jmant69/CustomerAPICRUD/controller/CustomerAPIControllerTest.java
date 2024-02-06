@@ -80,9 +80,10 @@ public class CustomerAPIControllerTest {
 
     	String requestUri = END_POINT_PATH + "/" + customerRef;
     	
+    	String expectedName = "John Smith";
+    	
     	Customer newCustomer = new Customer();
     	newCustomer.setCustomerRef(customerRef);
-    	String expectedName = "John Smith";
 		newCustomer.setCustomerName(expectedName);
     	newCustomer.setAddressLine1("22 Acacia Ave");
     	    	
@@ -112,9 +113,23 @@ public class CustomerAPIControllerTest {
             .andExpect(MockMvcResultMatchers.status().isNotFound())
             .andDo(MockMvcResultHandlers.print());
     }
-
+	
+    @Test
+    public void testUpdateShouldReturn404NotFound() throws Exception {
+		Customer updatedCustomer = new Customer();
+		updatedCustomer.setCustomerRef(500L);
+		
+		String requestBody = objectMapper.writeValueAsString(updatedCustomer);
+     
+        Mockito.when(service.update(updatedCustomer)).thenThrow(CustomerNotFoundException.class);
+     
+        mockMvc.perform(MockMvcRequestBuilders.put(END_POINT_PATH).contentType("application/json").content(requestBody))
+            .andExpect(MockMvcResultMatchers.status().isNotFound())
+            .andDo(MockMvcResultHandlers.print());
+    }
+    
 	@Test
-	public void testUpdateShouldReturn201Created() throws Exception {
+	public void testUpdateShouldReturn200Ok() throws Exception {
 		Customer updatedCustomer = new Customer();
 		updatedCustomer.setCustomerRef(1L);
 		String expectedValue = "James";
@@ -129,31 +144,36 @@ public class CustomerAPIControllerTest {
 
 		mockMvc.perform(MockMvcRequestBuilders.put(END_POINT_PATH).contentType("application/json").content(requestBody))
 				.andExpect(MockMvcResultMatchers.content().contentType("application/json"))
-				.andExpect(MockMvcResultMatchers.status().isCreated())
-				.andExpect(MockMvcResultMatchers.header().string("Location", "/customer/1"))
+				.andExpect(MockMvcResultMatchers.status().isOk())
 				.andExpect(MockMvcResultMatchers.jsonPath("$.customerName").value(expectedValue))
 				.andDo(MockMvcResultHandlers.print());
 	}
-	
+
+    
 	@Test
-	public void testUpdateShouldReturn201NullId() throws Exception {
-		Customer updatedCustomer = new Customer();
+    public void testDeleteShouldReturn404NotFound() throws Exception {
+        Long customerRef = 500L;
+        String requestURI = END_POINT_PATH + "/" + customerRef;
+     
+//        Mockito.when(service.delete(customerRef)).thenThrow(CustomerNotFoundException.class);
+        Mockito.doThrow(CustomerNotFoundException.class).when(service).delete(customerRef);
+     
+        mockMvc.perform(MockMvcRequestBuilders.delete(requestURI))
+            .andExpect(MockMvcResultMatchers.status().isNotFound())
+            .andDo(MockMvcResultHandlers.print());
+    }
+	
+    @Test
+    public void testDeleteShouldReturn204NoContent() throws Exception {
+        Long customerRef = 500L;
+        String requestURI = END_POINT_PATH + "/" + customerRef;
+     
+        Mockito.doNothing().when(service).delete(customerRef);
+     
+        mockMvc.perform(MockMvcRequestBuilders.delete(requestURI))
+            .andExpect(MockMvcResultMatchers.status().isNoContent())
+            .andDo(MockMvcResultHandlers.print());
+    }
 
-		String expectedValue = "James";
-		updatedCustomer.setCustomerName(expectedValue);
-
-		String requestBody = objectMapper.writeValueAsString(updatedCustomer);
-
-		Mockito.when(service.update(updatedCustomer)).thenReturn(updatedCustomer);
-
-		Mockito.when(modelMapper.map(updatedCustomer, CustomerDTO.class))
-				.thenReturn(modelMapperMock.map(updatedCustomer, CustomerDTO.class));
-
-		mockMvc.perform(MockMvcRequestBuilders.put(END_POINT_PATH).contentType("application/json").content(requestBody))
-				.andExpect(MockMvcResultMatchers.content().contentType("application/json"))
-				.andExpect(MockMvcResultMatchers.status().isCreated())
-                .andExpect(MockMvcResultMatchers.header().string("Location", "/customer/null"))
-				.andDo(MockMvcResultHandlers.print());
-	}	
 
 }

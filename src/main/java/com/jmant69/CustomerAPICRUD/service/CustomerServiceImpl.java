@@ -28,14 +28,19 @@ public class CustomerServiceImpl implements CustomerService{
         throw new CustomerNotFoundException();
     }
     
-    public Customer update(Customer customer) {
+    public Customer update(Customer customer) throws CustomerNotFoundException {
+    	if (!repo.existsById(customer.getCustomerRef())) {
+    		throw new CustomerNotFoundException();
+    	}
         return repo.save(customer);
     }
 
 	@Override
-	public Customer delete(Long id) {
-        repo.deleteById(id);
-        return null;
+	public void delete(Long customerRef) throws CustomerNotFoundException {
+    	if (!repo.existsById(customerRef)) {
+    		throw new CustomerNotFoundException();
+    	}
+        repo.deleteById(customerRef);
 	}
  
 }
