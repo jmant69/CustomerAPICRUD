@@ -53,7 +53,7 @@ public class CustomerAPIControllerTest {
         ;
     }
     
-        @Test
+    @Test
     public void testAddShouldReturn201Created() throws Exception {
         Customer newCustomer = new Customer();
         newCustomer.setCustomerRef(1L);
